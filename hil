@@ -175,8 +175,19 @@ comp-lzo
 comp-noadapt
 CLIENT_CONFIG
 
+sed -i $MYIP2 /etc/openvpn/client.ovpn.tmp;
 wget https://raw.githubusercontent.com/bobey6/airplane-vpn/master/vpn_usergen.sh
 chmod +x vpn_usergen.sh
+
+echo '<ca>' >> /etc/openvpn/client.ovpn.tmp
+cat /etc/openvpn/ca.crt >> /etc/openvpn/client.ovpn.tmp
+echo '</ca>' >> /etc/openvpn/client.ovpn.tmp
+
+# hh
+mv /etc/openvpn/client.ovpn.tmp /home/vps/public_html/client.ovpn.tmp
+
+cp /etc/openvpn/client.ovpn.tmp /home/vps/public_html/client.ovpn.tmp
+
 # download script
 cd /usr/bin
 wget -O menu "https://raw.githubusercontent.com/acillsadank/install/master/menu.sh"
