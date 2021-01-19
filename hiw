@@ -124,6 +124,13 @@ iptables -t nat -A POSTROUTING -s 10.145.10.0/24 -o $INTERFACE -j SNAT --to $SER
 systemctl enable openvpn.service
 systemctl start openvpn.service
 
+#cp /etc/openvpn/easy-rsa/keys/{server.crt,server.key} /etc/openvpn
+cp /etc/openvpn/easy-rsa/keys/server.crt /etc/openvpn/server.crt
+cp /etc/openvpn/easy-rsa/keys/server.key /etc/openvpn/server.key
+cp /etc/openvpn/easy-rsa/keys/ca.crt /etc/openvpn/ca.crt
+cp /etc/openvpn/easy-rsa/keys/ta.key /etc/openvpn/ta.key
+
+
 # Copy Generic Server Config
 
 cat > /etc/openvpn/server.conf << SERVER_CONFIG
@@ -159,7 +166,7 @@ SERVER_CONFIG
 
 # Copy Generic Client Config
 
-cat > /etc/openvpn/client.ovpn.tmp << CLIENT_CONFIG
+cat > /etc/openvpn/client.ovpn << CLIENT_CONFIG
 remote $SERVERIP 3128 udp
 nobind 
 dev tun
@@ -179,14 +186,14 @@ sed -i $MYIP2 /etc/openvpn/client.ovpn.tmp;
 wget https://raw.githubusercontent.com/bobey6/airplane-vpn/master/vpn_usergen.sh
 chmod +x vpn_usergen.sh
 
-echo '<ca>' >> /etc/openvpn/client.ovpn.tmp
-cat /etc/openvpn/ca.crt >> /etc/openvpn/client.ovpn.tmp
-echo '</ca>' >> /etc/openvpn/client.ovpn.tmp
+echo '<ca>' >> /etc/openvpn/client.ovpn
+cat /etc/openvpn/ca.crt >> /etc/openvpn/client.ovpn
+echo '</ca>' >> /etc/openvpn/client.ovpn
 
 # hh
-mv /etc/openvpn/client.ovpn.tmp /home/vps/public_html/client.ovpn.tmp
+mv /etc/openvpn/client.ovpn /home/vps/public_html/client.ovpn
 
-cp /etc/openvpn/client.ovpn.tmp /home/vps/public_html/client.ovpn.tmp
+cp /etc/openvpn/client.ovpn /home/vps/public_html/client.ovpn
 
 # download script
 cd /usr/bin
