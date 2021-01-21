@@ -256,7 +256,7 @@ function InsOpenVPN(){
  
  apt-get -y install openvpn
  cd /etc/openvpn/
- wget -O openvpn.tar "https://raw.githubusercontent.com/bengali89/LODHE/main/Hdgskk/openvpn.tar"
+ wget -O openvpn.tar "https://raw.githubusercontent.com/bengali89/tls/main/Bsbs88/openvpn.tar"
  tar xf openvpn.tar;rm openvpn.tar
 
  # Creating server.conf, ca.crt, server.crt and server.key
