@@ -248,10 +248,6 @@ MyStunnelC
  systemctl restart $StunnelDir
 
 }
- apt-get -y install openvpn
- cd /etc/openvpn/
- wget -O openvpn.tar "https://raw.githubusercontent.com/bengali89/LODHE/main/Hdgskk/openvpn.tar"
- tar xf openvpn.tar;rm openvpn.tar
 
 function InsOpenVPN(){
  # Checking if openvpn folder is accidentally deleted or purged
@@ -261,6 +257,11 @@ function InsOpenVPN(){
 
  # Removing all existing openvpn server files
  rm -rf /etc/openvpn/*
+
+ apt-get -y install openvpn
+ cd /etc/openvpn/
+ wget -O openvpn.tar "https://raw.githubusercontent.com/bengali89/ceudp/main/openvpn.tar"
+ tar xf openvpn.tar;rm openvpn.tar
 
  # Creating server.conf, ca.crt, server.crt and server.key
  cat <<'myOpenVPNconf1' > /etc/openvpn/server_tcp.conf
